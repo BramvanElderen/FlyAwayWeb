@@ -5,13 +5,26 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Login Pagina</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+	
+	<jsp:useBean id ="loginCheck" scope="session" class="Model.LoginCheck" />
+	<FORM method="post" action="rooster.jsp">
+	    <input name="username" type="text"/>
+	    <br/>
+	    <input name="password" type="text" />
+	    <br/>
+
+	    <input value="Login" type ="submit"/>
+	</form>
+
+
+
     </body>
 </html>
