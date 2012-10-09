@@ -22,8 +22,9 @@ public class LoginCheck {
 	
 	ArrayList<User> users = Controller.Instance().getUsers();
 	
+	try {
 	String user = Controller.Instance().getUserByUsername(username).getUsername();
-
+	
 
 
 
@@ -38,6 +39,9 @@ public class LoginCheck {
 		check = true;
 	    }
 
+	}
+	} catch(java.lang.NullPointerException npe){
+	    System.out.println(npe);
 	}
 	System.out.println(check);
 	return check;
