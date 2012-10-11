@@ -57,40 +57,39 @@
                 SchedulePlanner sp = new SchedulePlanner();
                 String id = request.getParameter("username");
                 ArrayList<Flight> flights = sp.getPlanning(id);
-
                 for (int i = 0; i < flights.size(); i++) {
             %>
 
             <tr>
                 <td>
-                    <% flights.get(i).getCopilot(); %>
+                    <% out.print(flights.get(i).getCopilot()); %>
                 </td>
                 <td>
-                    <% flights.get(i).getDate(); %>
+                    <% out.print(flights.get(i).getDate()); %>
                 </td>
                 <td>
-                    <% flights.get(i).getDestination(); %>
+                    <% out.print(flights.get(i).getDestination()); %>
                 </td>
                 <td>
-                    <% flights.get(i).getFrom(); %>
+                    <% out.print(flights.get(i).getFrom()); %>
                 </td>
                 <td>
-                    <% flights.get(i).getNumber(); %>
+                    <% out.print(flights.get(i).getNumber()); %>
                 </td>
                 <td>
-                    <% flights.get(i).getOtherPersonal(); %>
+                    <% out.print(flights.get(i).getOtherPersonal()); %>
                 </td>
                 <td>
-                    <% flights.get(i).getPilot(); %>
+                    <% out.print(flights.get(i).getPilot()); %>
                 </td>
                 <td>
-                    <% flights.get(i).getPlane(); %>
+                    <% out.print(flights.get(i).getPlane()); %>
                 </td>
                 <td>
-                    <% flights.get(i).getReturnFlight(); %>
+                    <% out.print(flights.get(i).getReturnFlight()); %>
                 </td>
                 <td>
-                    Stops<% flights.get(i).getStops(); %>
+                    <% out.print( flights.get(i).getStops()); %>
                 </td>
             </tr>
 
