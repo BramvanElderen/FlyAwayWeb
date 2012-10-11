@@ -18,6 +18,7 @@
         <jsp:useBean id ="loginCheck" scope="session" class="Model.LoginCheck" />
         <%
             if (loginCheck.login(request.getParameter("username"), request.getParameter("password"))) {
+		try {
         %>
         <table border ="0">
             <tr>
@@ -56,7 +57,9 @@
             <%
                 SchedulePlanner sp = new SchedulePlanner();
                 String id = request.getParameter("username");
-                ArrayList<Flight> flights = sp.getPlanning(id);
+                
+		ArrayList<Flight> flights = sp.getPlanning(id);
+		
                 for (int i = 0; i < flights.size(); i++) {
             %>
 
@@ -94,6 +97,9 @@
             </tr>
 
             <%                        }
+			}catch(NullPointerException e) {
+		    out.print("No flights found");
+			}
             %>
 
         </table>
