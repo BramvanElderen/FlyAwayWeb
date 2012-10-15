@@ -15,91 +15,152 @@
         <title>Roosters</title>
     </head>
     <body>
+	<style type="text/css">
+	body {
+	    text-align: center;
+	    background-image:url(images/backgroundimage.png);
+	    background-repeat: repeat;
+	    margin-top: 100px;
+	}
+	
+	table {
+	    border-collapse: collapse;
+	    font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+	    width: 100%;
+	}
+	table td, table th {
+	    border: 1px solid #000000;
+	    font-size: 1.0em;
+	    padding: 3px 7px 2px;
+	}
+	table th {
+	    background-color: #000000;
+	    color: #FFFFFF;
+	    font-size: 1.2em;
+	    padding-bottom: 4px;
+	    padding-top: 5px;
+	    text-align: center;
+	}
+	table tr.alt td {
+	    background-color: #EAF2D3;
+	    color: #000000;
+	}
+	
+	#usernameweergave {
+	    font-size: 30px;
+	}
+	
+	</style>
         <jsp:useBean id ="loginCheck" scope="session" class="Model.LoginCheck" />
+	    <img src="images/titel.png" alt="titel">
         <%
-            if (loginCheck.login(request.getParameter("username"), request.getParameter("password"))) {
+	    if (loginCheck.login(request.getParameter("username"), request.getParameter("password"))) {
 		try {
+
+		    SchedulePlanner sp = new SchedulePlanner();
+		    String id = request.getParameter("username");
+		    
+		    ArrayList<Flight> flights = sp.getPlanning(id);
+		    %>
+		    <div id="usernameweergave">
+		       Rooster van: <% out.print(sp.getStaffName()) ;%></br>
+		    </div>
+		    <%
+		    if (flights.size() != 0) {
         %>
-        <table border ="0">
+        <table border="0">
             <tr>
-                <td>
-                    Co-pilot
-                </td>
-                <td>
+                <th>
+                    Flight Number
+                </th>
+		
+                <th>
                     Date
-                </td>
-                <td>
-                    Destination
-                </td>
-                <td>
+                </th>
+		<th>
                     From
-                </td>
-                <td>
-                    Number
-                </td>
-                <td>
-                    Other Personal
-                </td>
-                <td>
-                    Pilot
-                </td>
-                <td>
-                    Plane
-                </td>
-                <td>
-                    Return Flight
-                </td>
-                <td>
+                </th>
+                <th>
+                    Destination
+                </th>
+		<th>
                     Stops
-                </td>
+                </th>
+                <th>
+                    Pilot
+                </th>
+		<th>
+                    Co-pilot
+                </th>
+		<th>
+                    Other Personal
+                </th>
+                <th>
+                    Plane
+                </th>
+                <th>
+                    Return Flight
+                </th>
+                
             </tr>
 
             <%
-                SchedulePlanner sp = new SchedulePlanner();
-                String id = request.getParameter("username");
-                
-		ArrayList<Flight> flights = sp.getPlanning(id);
-		
-                for (int i = 0; i < flights.size(); i++) {
+
+
+		for (int i = 0; i < flights.size(); i++) {
             %>
 
             <tr>
+		<!--1. Number-->
                 <td>
-                    <% out.print(flights.get(i).getCopilot()); %>
+                    <% out.print(flights.get(i).getNumber());%>
                 </td>
+		<!--2. Date-->
                 <td>
-                    <% out.print(flights.get(i).getDate()); %>
+                    <% out.print(flights.get(i).getDate());%>
                 </td>
-                <td>
-                    <% out.print(flights.get(i).getDestination()); %>
+		<!--3. From-->
+		<td>
+                    <% out.print(flights.get(i).getFrom());%>
                 </td>
+		<!--4. Destination-->
                 <td>
-                    <% out.print(flights.get(i).getFrom()); %>
+                    <% out.print(flights.get(i).getDestination());%>
                 </td>
-                <td>
-                    <% out.print(flights.get(i).getNumber()); %>
+		<!--5. stops-->
+		<td>
+                    <% out.print(flights.get(i).getStops());%>
                 </td>
-                <td>
-                    <% out.print(flights.get(i).getOtherPersonal()); %>
+		<!--6. pilot-->
+		<td>
+                    <% out.print(flights.get(i).getPilot());%>
                 </td>
-                <td>
-                    <% out.print(flights.get(i).getPilot()); %>
+                
+		<!--7. Copilot-->
+		<td>
+                    <% out.print(flights.get(i).getCopilot());%>
                 </td>
+		<!-- Otherpersonal-->
                 <td>
-                    <% out.print(flights.get(i).getPlane()); %>
+                    <% out.print(flights.get(i).getOtherPersonal());%>
                 </td>
+		<!--8. Plane-->
                 <td>
-                    <% out.print(flights.get(i).getReturnFlight()); %>
+                    <% out.print(flights.get(i).getPlane());%>
                 </td>
+		<!--9. ReturnFlight-->
                 <td>
-                    <% out.print( flights.get(i).getStops()); %>
+                    <% out.print(flights.get(i).getReturnFlight());%>
                 </td>
             </tr>
 
             <%                        }
-			}catch(NullPointerException e) {
+		    } else {
+			out.print("No flights found");
+		    }
+		} catch (NullPointerException e) {
 		    out.print("No flights found");
-			}
+		}
             %>
 
         </table>
@@ -116,17 +177,11 @@
 
 
         <%	    } else {
-            out.print("Username of Password incorrect.");
-
-        %>
-        <form action="index.jsp"/>
-        <input value="Terug" type="submit"/>
-    </form>
-    <%
-        }
-
-
+	    out.print("Username of Password incorrect.");
+	}
     %>
-
+	<form action="index.jsp"/>
+	    <input value="Terug" type="submit"/>
+	</form>
 </body>
 </html>

@@ -13,15 +13,27 @@
         <title>Login Pagina</title>
     </head>
     <body>
-	
+	<style type="text/css">
+	body {
+	    text-align: center;
+	    background-image:url(images/backgroundimage.png);
+	    background-repeat: repeat;
+	    margin-top: 100px;
+	}
+	#title {
+	    font-style: italic;
+	    font-size: 20px;
+	}
+	</style>
+	<div id="title">
+	    <img src="images/titel.png" alt="titel">
+	</div>
 	<jsp:useBean id ="loginCheck" scope="session" class="Model.LoginCheck" />
 	<FORM method="post" action="rooster.jsp">
-	    <input name="username" type="text"/>
-	    <br/>
-	    <input name="password" type="text" />
-	    <br/>
-
-	    <input value="Login" type ="submit"/>
+	    <pre>Username   <input name="username" type="text"/>
+Password   <input name="password" type="password" />
+<input value="Login" type ="submit"/>
+	    </pre>
 	</form>
 
 
